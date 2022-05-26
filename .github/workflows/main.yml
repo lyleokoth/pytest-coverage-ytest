@@ -1,0 +1,17 @@
+name: My Workflow
+
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: oryks code coverage action
+      id: selftest
+      uses: lyleokoth/pytest-coverage-ytest@v1.0.0
+      with:
+        codedirectory: src/
+        testdirectory: tests/
+
+    - name: action output
+      run: |
+        echo "${{ steps.selftest.outputs.testcoverage }}"
