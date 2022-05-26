@@ -34,4 +34,4 @@ def multiply(x: int, y: int) -> int:
     Returns:
                     int: product of x and y
     """
-    return x * y
+    return x * y 
