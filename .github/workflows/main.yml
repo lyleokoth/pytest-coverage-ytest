@@ -1,17 +1,32 @@
-name: My Workflow
+on: [push]
 
-on: [push, pull_request]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: oryks code coverage action
-      id: selftest
-      uses: lyleokoth/pytest-coverage-ytest@v1.0.0
-      with:
-        codedirectory: src/
-        testdirectory: tests/
 
-    - name: action output
-      run: |
-        echo "${{ steps.selftest.outputs.testcoverage }}"
+  Build:
+    runs-on: ubuntu-latest
+    name: A job to test the oryks code coverage action
+
+    steps:
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi 
+      - name: oryks code coverage action
+        id: selftest
+        uses: lyleokoth/pytest-coverage-ytest@v1.0.0
+        with:
+          codedirectory: src/
+          testdirectory: tests/
+
+      - name: action output
+        run: |
+          echo "${{ steps.selftest.outputs.testcoverage }}"
