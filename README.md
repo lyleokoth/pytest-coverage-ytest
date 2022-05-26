@@ -28,6 +28,7 @@ This action shows code coverage using pycov.
 The Test coverage
 
 ## Example usage
+```
 
 - name: oryks code coverage action
   id: selftest
@@ -39,3 +40,4 @@ The Test coverage
 - name: action output
   run: |
     echo "${{ steps.selftest.outputs.testcoverage }}
+```
